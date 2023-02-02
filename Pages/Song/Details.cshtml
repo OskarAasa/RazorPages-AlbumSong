@@ -1,0 +1,50 @@
+﻿@page
+@model RazorPagesAlbumSong.Pages.Song.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details  | <img src="~/SongCard.jpg" height="50" /></h1>
+
+<div>
+    <h4>Song</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Song.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Song.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Song.Lenght)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Song.Lenght)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SongRecordVM.ArtistName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SongRecordVM.ArtistName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SongRecordVM.AlbumName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SongRecordVM.AlbumName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SongRecordVM.RecordCompany)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SongRecordVM.RecordCompany)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@Model.Song?.SongId">Delete</a> |
+    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@Model.Song?.SongId">Edit</a> |
+    <a class="btn btn-primary" asp-page="./Index">Back</a>
+</div>

@@ -1,0 +1,39 @@
+﻿@page
+@model RazorPagesAlbumSong.Pages.Record.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Records  | <img src="~/VinylCard.png" height="50"></h1>
+<h4>Number of records: @Html.DisplayFor(model => model.Records.Count)</h4>
+
+<p>
+    <a class="btn btn-success" asp-page="Create">Create New</a>
+</p>
+
+<div class="row">
+    @foreach (var item in Model.Records)
+    {
+        <div class="col-3 card" style="text-align:center">
+            <div class="card-body">
+                <img class="card-img-top" src="~/VinylCard.png">
+                <div class="card-header">
+                    <h3>
+                        @item.ArtistName
+                    </h3>
+                    <h3>
+                        @item.AlbumName
+                    </h3>
+                </div>
+                <div class="card-text">
+                    @item.ReleaseDate.ToString("d")
+                </div>
+                <div class="card-footer" style="text-align:right">
+                    <a class="btn btn-primary stretched-link w-100" asp-page="./Details" asp-route-id="@item.RecordId"></a>
+                    @item.RecordCompany
+                </div>
+            </div>
+        </div>
+    }
+</div>

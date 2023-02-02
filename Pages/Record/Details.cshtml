@@ -1,0 +1,138 @@
+﻿@page
+@model RazorPagesAlbumSong.Pages.Record.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>
+    Details  |  <img src="~/VinylCard.png" height="50" />
+</h1>
+<div style="text-align:right">
+    <a class="btn btn-lg btn-danger" style="" asp-page="/Record/Delete" asp-route-id="@Model.Record.RecordId">Delete</a>
+    <a class="btn btn-lg btn-primary" style="" asp-page="/Record/Edit" asp-route-id="@Model.Record.RecordId">Edit</a>
+</div>
+
+<h1>@Html.DisplayFor(model =>model.Record.AlbumName)</h1>
+<hr />
+<div class="row">
+
+    <dl class="col-6 card" style="height: 330px">
+        <div class="card-body">
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Record.ArtistName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Record.ArtistName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Record.AlbumName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Record.AlbumName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Record.ReleaseDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Record.ReleaseDate)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Record.RecordCompany)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Record.RecordCompany)
+            </dd>
+        </div>
+
+    </dl>
+
+    <div class="col-6 card" style="height: 330px">
+        <div class="card-body">
+
+            <h5>Add song</h5>
+            <div class="col-md-6">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Song.Title" class="control-label"></label>
+                        <input asp-for="Song.Title" class="form-control" />
+                        <span asp-validation-for="Song.Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Song.Lenght" class="control-label"></label>
+                        <input asp-for="Song.Lenght" class="form-control" />
+                        <span asp-validation-for="Song.Lenght" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Song.Author" class="control-label"></label>
+                        <input asp-for="Song.Author" class="form-control" />
+                        <span asp-validation-for="Song.Author" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Add song" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <h5>Songs</h5>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Song.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Song.Lenght)
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Record.Songs.Count >= 1)
+            {
+                foreach (var item in Model.Record.Songs)
+                {
+                    <tr>
+                        <td>
+                            @item.Title
+                        </td>
+                        <td>
+                            @item.Lenght.ToString("mm\\:ss")
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" asp-page="/Song/Edit" asp-route-id="@item.SongId">Edit</a> |
+                            <a class="btn btn-sm btn-danger" asp-page="/Song/Delete" asp-route-id="@item.SongId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        No songs in this album yet.
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a class="btn btn-primary" asp-page="./Index">Back</a>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

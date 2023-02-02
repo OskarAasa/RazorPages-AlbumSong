@@ -1,0 +1,52 @@
+﻿@page
+@model RazorPagesAlbumSong.Pages.Song.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Songs  |  <img src="~/SongCard.jpg" height="50"></h1>
+<h4>Number of songs: @Html.DisplayFor(model => model.Song.Count)</h4>
+
+<p>
+    @if (Model.Records == null)
+    {
+    <p>There are currently no records. Please create one before you create songs.</p>
+    <a class="btn btn-success" asp-page="/Record/Create">Create a new record</a>
+    }
+    else
+    {
+    <a class="btn btn-success" asp-page="Create">Create New</a>
+    }
+</p>
+
+<div class="row">
+    @foreach (var item in Model.SongRecordVM)
+    {
+        <div class="col-2 card" style="text-align:center">
+            <div class="card-body">
+                <img class="card-img-top" src="~/SongCard.jpg">
+                <div class="card-header">
+                    <h4>
+                        @item.Title
+                    </h4>
+                    <h5>
+                        @item.ArtistName
+                    </h5>
+                </div>
+                <div class="card-text">
+                    <h6>
+                        @item.Lenght.ToString("mm\\:ss")
+                    </h6>
+                    <p>
+                    @item.AlbumName
+                    </p>
+                </div>
+                <div class="card-footer" style="text-align:right">
+                    <a class="btn btn-primary stretched-link w-100" asp-page="./Details" asp-route-id="@item.SongId"></a>
+                    @item.RecordCompany
+                </div>
+            </div>
+        </div>
+    }
+</div>
